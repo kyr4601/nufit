@@ -77,7 +77,7 @@ const SaveFood = () => {
             <TouchableOpacity
               style={styles.tabItem}
               onPress={() => setIndex(i)}
-              key={i} // Added key prop
+              key={i} 
             >
               <Animated.Text style={{ opacity }}>{route.title}</Animated.Text>
             </TouchableOpacity>
