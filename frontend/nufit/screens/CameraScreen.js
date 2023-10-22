@@ -13,7 +13,7 @@ const CameraScreen = ({navigation}) => {
   const takePictureHandler = async () => { 
     if (!cameraRef.current) return;
     
-    // takePictureAsync를 통해 사진을 찍고 base64 형식으로 저장\
+    // takePictureAsync를 통해 사진을 찍고 base64 형식으로 저장
     await cameraRef.current
       .takePictureAsync({
         base64: true,

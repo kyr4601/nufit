@@ -1,19 +1,37 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Text, StyleSheet, View,TouchableOpacity, ScrollView } from 'react-native'
 import NutBox from '../components/NutBox';
 import NutDetail from '../components/NutDetail';
+import axios from 'axios';
 
 const SearchDetail = ({ route, navigation }) => {
-  const { title } = route.params;
+
+  const item = route.params.item;
+  const name = item.title;
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://43.202.91.101:8080/api/foods/1`); 
+        console.log(response.data)
+        setData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const goNext = () => {
     navigation.navigate('ChooseSearch');
   }
-  //임시 data
-  const kcalData = 132
-  const carb = 30
+  //data
+  const kcalData = data ? data.calorie : 0;
+  const carb = data ? data.nutrientResponses[0].amount : 0;
   const sugar = 28
-  const protein = 24
+  const protein = data ? data.nutrientResponses[1].amount : 0;
   const totalf = 23.1
   const transf = 12.4
   const satf = 42
@@ -28,15 +46,15 @@ const SearchDetail = ({ route, navigation }) => {
           <Text style={{color: '#fff', fontSize: 12}}>이 음식이 아니에요 ↗</Text>
         </TouchableOpacity>
         <View style={{flexDirection: 'row', alignItems: 'flex-start', marginTop: 36, justifyContent: 'space-between'}}>
-          <Text style={styles.resultText}>{title}</Text>
+          <Text style={styles.resultText}>{name}</Text>
           <View>
             <Text style={{textAlign: 'right', color: '#fff', fontSize: 15, fontFamily: "Pretendard-Light", marginBottom: 5}}>총 칼로리.</Text>
-            <Text style={styles.resultText}>{kcalData}kcal</Text>
+            <Text style={styles.resultText}>{kcalData} kcal</Text>
           </View>
         </View>
         <View style={styles.nutRes}>
-          <NutBox nutName={'탄수화물'} grams={'60'} percents={'40'}/>
-          <NutBox nutName={'단백질'} grams={'40'} percents={'40'}/>
+          <NutBox nutName={'탄수화물'} grams={carb} percents={'40'}/>
+          <NutBox nutName={'단백질'} grams={protein} percents={'40'}/>
           <NutBox nutName={'지방'} grams={'20'} percents={'40'}/>
         </View>
       </View>
