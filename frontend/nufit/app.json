@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "nufit",
-    "scheme" : "nufit",
+    "scheme": "nufit",
     "slug": "nufit",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -16,19 +16,26 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.nufit",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.nufit",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
-      "apiKey": "AIzaSyAT5KAVZK9c6JRMRbw2NbtqF2v47cdgCVM"
+      "apiKey": "AIzaSyAT5KAVZK9c6JRMRbw2NbtqF2v47cdgCVM",
+      "eas": {
+        "projectId": "96290629-d7ab-44ea-80a7-5867f278bb0f"
+      }
     }
   }
 }
